@@ -1,0 +1,153 @@
+<div class="form-wrapper">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>
+        <mat-icon>{{ isEditMode ? 'edit' : 'person_add' }}</mat-icon>
+        {{ isEditMode ? 'Edit Employee' : 'Add New Employee' }}
+      </mat-card-title>
+      <mat-card-subtitle>
+        {{ isEditMode ? 'Update employee information' : 'Fill in the details to create a new employee record' }}
+      </mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+      @if (loading) {
+        <div class="loading-container">
+          <mat-spinner diameter="48"></mat-spinner>
+          <p>Loading employee data...</p>
+        </div>
+      } @else {
+        <form [formGroup]="form" (ngSubmit)="submit()">
+
+          <!-- Personal Information -->
+          <h3 class="section-title">
+            <mat-icon>person</mat-icon> Personal Information
+          </h3>
+          <mat-divider></mat-divider>
+
+          <div class="form-row">
+            <mat-form-field appearance="outline" class="half-width">
+              <mat-label>First Name</mat-label>
+              <input matInput formControlName="firstName" placeholder="John" />
+              <mat-icon matSuffix>badge</mat-icon>
+              @if (getError('firstName')) {
+                <mat-error>{{ getError('firstName') }}</mat-error>
+              }
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="half-width">
+              <mat-label>Last Name</mat-label>
+              <input matInput formControlName="lastName" placeholder="Doe" />
+              <mat-icon matSuffix>badge</mat-icon>
+              @if (getError('lastName')) {
+                <mat-error>{{ getError('lastName') }}</mat-error>
+              }
+            </mat-form-field>
+          </div>
+
+          <div class="form-row">
+            <mat-form-field appearance="outline" class="half-width">
+              <mat-label>Email Address</mat-label>
+              <input matInput formControlName="email" placeholder="john.doe@company.com" type="email" />
+              <mat-icon matSuffix>email</mat-icon>
+              @if (getError('email')) {
+                <mat-error>{{ getError('email') }}</mat-error>
+              }
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="half-width">
+              <mat-label>Phone Number</mat-label>
+              <input matInput formControlName="phone" placeholder="+1 (555) 000-0000" />
+              <mat-icon matSuffix>phone</mat-icon>
+              @if (getError('phone')) {
+                <mat-error>{{ getError('phone') }}</mat-error>
+              }
+            </mat-form-field>
+          </div>
+
+          <!-- Job Information -->
+          <h3 class="section-title">
+            <mat-icon>work</mat-icon> Job Information
+          </h3>
+          <mat-divider></mat-divider>
+
+          <div class="form-row">
+            <mat-form-field appearance="outline" class="half-width">
+              <mat-label>Department</mat-label>
+              <mat-select formControlName="department">
+                @for (dept of departments; track dept) {
+                  <mat-option [value]="dept">{{ dept }}</mat-option>
+                }
+              </mat-select>
+              <mat-icon matSuffix>corporate_fare</mat-icon>
+              @if (getError('department')) {
+                <mat-error>{{ getError('department') }}</mat-error>
+              }
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="half-width">
+              <mat-label>Position / Job Title</mat-label>
+              <input matInput formControlName="position" placeholder="Software Engineer" />
+              <mat-icon matSuffix>work_outline</mat-icon>
+              @if (getError('position')) {
+                <mat-error>{{ getError('position') }}</mat-error>
+              }
+            </mat-form-field>
+          </div>
+
+          <div class="form-row">
+            <mat-form-field appearance="outline" class="half-width">
+              <mat-label>Annual Salary (USD)</mat-label>
+              <span matTextPrefix>$&nbsp;</span>
+              <input matInput formControlName="salary" type="number" placeholder="60000" min="0" />
+              @if (getError('salary')) {
+                <mat-error>{{ getError('salary') }}</mat-error>
+              }
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="half-width">
+              <mat-label>Hire Date</mat-label>
+              <input matInput [matDatepicker]="hirePicker" formControlName="hireDate" [max]="maxDate" />
+              <mat-datepicker-toggle matIconSuffix [for]="hirePicker"></mat-datepicker-toggle>
+              <mat-datepicker #hirePicker></mat-datepicker>
+              @if (getError('hireDate')) {
+                <mat-error>{{ getError('hireDate') }}</mat-error>
+              }
+            </mat-form-field>
+          </div>
+
+          <div class="form-row">
+            <mat-form-field appearance="outline" class="half-width">
+              <mat-label>Status</mat-label>
+              <mat-select formControlName="status">
+                <mat-option value="ACTIVE">Active</mat-option>
+                <mat-option value="INACTIVE">Inactive</mat-option>
+              </mat-select>
+              <mat-icon matSuffix>toggle_on</mat-icon>
+              @if (getError('status')) {
+                <mat-error>{{ getError('status') }}</mat-error>
+              }
+            </mat-form-field>
+          </div>
+
+          <!-- Actions -->
+          <div class="form-actions">
+            <button type="button" mat-stroked-button (click)="goBack()" [disabled]="saving">
+              <mat-icon>arrow_back</mat-icon>
+              Cancel
+            </button>
+            <button type="submit" mat-raised-button color="primary" [disabled]="saving">
+              @if (saving) {
+                <mat-spinner diameter="20" style="display:inline-block;margin-right:8px;"></mat-spinner>
+              } @else {
+                <mat-icon>{{ isEditMode ? 'save' : 'add' }}</mat-icon>
+              }
+              {{ isEditMode ? 'Update Employee' : 'Create Employee' }}
+            </button>
+          </div>
+
+        </form>
+      }
+    </mat-card-content>
+  </mat-card>
+</div>

@@ -1,0 +1,109 @@
+================================================================================
+EPIC 5: Backend API & Data Services
+================================================================================
+Scope   : Backend
+Stories : US-21, US-22, US-23
+Goal    : Provide the server-side APIs required to support the RBP Calculator
+          frontend — field/parameter configuration, rule persistence, and
+          expression evaluation.
+
+NOTE: The BA document focuses on UI behavior. Backend requirements below are
+      derived implicitly from the functional needs of the UI. All stories in
+      this Epic are marked [Needs Clarification] until confirmed by the BA.
+================================================================================
+
+
+--------------------------------------------------------------------------------
+US-21 | API: Provide Configurable Field/Parameter List
+--------------------------------------------------------------------------------
+Type : Backend
+
+As a developer,
+I want a backend API endpoint that returns the list of configurable fields
+(parameters),
+So that the frontend can dynamically load the Parameter panel options instead
+of hardcoding them.
+
+Acceptance Criteria:
+- A GET API endpoint returns the list of available fields/parameters.
+- Each field has at minimum:
+    - A unique identifier (field key, e.g., "FieldA")
+    - A display label (e.g., "FieldA")
+- The response is consumed by the frontend to populate the Parameter panel
+  (US-02).
+- The endpoint handles an empty field list gracefully (returns empty array).
+
+Notes / Clarifications:
+- [Needs Clarification] Are the field labels (FieldA–FieldF) static/hardcoded
+  in the UI, or must they be fetched from a backend configuration API?
+- [Needs Clarification] Can administrators add or remove fields via a
+  configuration screen (out of scope for this document)?
+- [Needs Clarification] What is the expected response schema for this endpoint?
+
+
+--------------------------------------------------------------------------------
+US-22 | API: Save Rule / Expression Configuration
+--------------------------------------------------------------------------------
+Type : Backend
+
+As a rule builder user,
+I want the rule I build (expressions, comparators, conditions, groups) to be
+persisted,
+So that it can be retrieved and applied in future processing runs.
+
+Acceptance Criteria:
+- A POST/PUT API endpoint accepts the full rule structure (all conditions,
+  AND/OR logic, subgroups, expressions) in a structured format (e.g., JSON).
+- The rule structure captures:
+    - Each condition row (left expression, comparator, right expression)
+    - AND/OR connectors between conditions
+    - Subgroup nesting with their own conditions and connectors
+    - Token details: field references, math functions, operators, numeric values
+- The API returns a success response with the saved rule's identifier.
+- The API returns appropriate error responses for invalid or malformed
+  rule structures.
+
+Notes / Clarifications:
+- [Needs Clarification] Is there a "Save Rule" action in the UI? The BA
+  document does not mention a Save button — clarify whether rules are
+  auto-saved or require an explicit save action.
+- [Needs Clarification] What is the expected JSON schema for the rule payload?
+- [Needs Clarification] Can a saved rule be loaded back into the builder for
+  editing?
+
+
+--------------------------------------------------------------------------------
+US-23 | API: Evaluate / Execute Expression
+--------------------------------------------------------------------------------
+Type : Backend
+
+As a rule builder user,
+I want the RBP Calculator to evaluate the built expression against data,
+So that I can compute results based on the configured rules.
+
+Acceptance Criteria:
+- A POST API endpoint accepts:
+    - A rule/expression structure (or saved rule ID)
+    - Input data values for the fields (FieldA–FieldF)
+- The API evaluates the expression using the provided field values.
+- The API applies the selected math functions (Min, MAX, FLOOR, ABS, CEIL,
+  BRACKET) correctly.
+- The API evaluates comparators (Equal to, Lower than, etc.) and returns a
+  boolean result per condition.
+- For compound rules (AND/OR, subgroups), the API returns the overall boolean
+  result after applying the group logic.
+- The API returns appropriate error responses for missing field values or
+  invalid expressions.
+
+Notes / Clarifications:
+- [Needs Clarification] Is expression evaluation a real-time backend call,
+  or is it computed client-side?
+- [Needs Clarification] What does "RBP Calculator" stand for, and what is the
+  primary use case for evaluating these rules (e.g., pricing, eligibility,
+  risk scoring)?
+- [Needs Clarification] What are the data types of FieldA–FieldF
+  (numeric, string, date)?
+
+================================================================================
+END OF EPIC 5
+================================================================================

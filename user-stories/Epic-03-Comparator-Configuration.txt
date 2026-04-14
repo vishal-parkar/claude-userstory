@@ -1,0 +1,103 @@
+================================================================================
+EPIC 3: Comparator Configuration
+================================================================================
+Scope   : Frontend
+Stories : US-14, US-15, US-16
+Goal    : Allow the user to define the comparison operator that sits between
+          the left-hand expression and the right-hand expression, completing
+          one condition row.
+================================================================================
+
+
+--------------------------------------------------------------------------------
+US-14 | Open Add Comparator Popup
+--------------------------------------------------------------------------------
+Type : Frontend
+
+As a rule builder user,
+I want to click on the "Add Comparator" label/button,
+So that I can open a popup and select a comparison operator for my condition.
+
+Acceptance Criteria:
+- An "Add Comparator" label/button is displayed in the condition row.
+- Clicking "Add Comparator" opens a popup/dropdown overlay.
+- The popup is positioned near the "Add Comparator" trigger element.
+- The popup is dismissible (e.g., clicking outside or pressing Escape closes
+  it without selecting anything).
+- While the popup is open, the rest of the UI remains visible but inactive.
+
+Notes / Clarifications:
+- [Needs Clarification] Is the "Add Comparator" button only enabled/clickable
+  after the left-hand expression has been partially or fully built, or is it
+  always clickable?
+
+
+--------------------------------------------------------------------------------
+US-15 | Select Comparator Option
+--------------------------------------------------------------------------------
+Type : Frontend
+
+As a rule builder user,
+I want to choose a comparison operator from the Add Comparator popup,
+So that I can define the relationship between the left and right expressions
+in a condition.
+
+Acceptance Criteria:
+- The Add Comparator popup displays exactly the following options:
+    - Equal to
+    - Lower than
+    - Lower than equal to
+    - Higher than
+    - Higher than equal to
+- Each option is a clickable item.
+- The option labels are displayed exactly as listed above (case and spacing
+  as shown).
+- Clicking an option:
+    1. Closes the popup.
+    2. Adds the selected comparator label into the "Add Comparator" field/slot
+       in the condition row.
+- Only one comparator can be selected per condition row.
+
+Notes / Clarifications:
+- [Needs Clarification] Should "Not equal to" be included? It is not mentioned
+  in the document.
+- [Needs Clarification] After a comparator is selected, can the user click
+  it again to change it to a different comparator?
+
+
+--------------------------------------------------------------------------------
+US-16 | Right-Hand Expression After Comparator
+--------------------------------------------------------------------------------
+Type : Frontend
+
+As a rule builder user,
+I want to build a right-hand expression after selecting a comparator,
+So that I can complete the condition with a full expression on both sides of
+the comparison operator.
+
+Acceptance Criteria:
+- After a comparator is selected and added to the condition row, an
+  "Add Expression" field/area appears on the right side of the comparator
+  (or is activated for right-side input).
+- The right-hand "Add Expression" supports the same expression-building
+  behavior as the left-hand expression (US-06 through US-13):
+    - Parameter selection (FieldA–FieldF + Number)
+    - Math Function selection (Min, MAX, FLOOR, ABS, BRACKET, CEIL)
+    - All tab (combined view)
+    - Operator "+" between operands
+    - Number editing via popup
+    - Bracket nested expressions
+- The right-hand expression is visually distinguished from the left-hand
+  expression within the same condition row.
+- Once both left expression, comparator, and right expression are filled,
+  the condition is considered complete (see US-17).
+
+Notes / Clarifications:
+- [Needs Clarification] Is the right-side expression built in the same
+  Add Expression field or a separate field?
+- [Needs Clarification] Is there any validation that prevents saving a
+  condition with an empty right-hand expression?
+
+================================================================================
+END OF EPIC 3
+================================================================================
