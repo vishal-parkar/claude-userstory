@@ -78,3 +78,5 @@ If required add validation as seperate topic
 
 for each epic create a seperate folder with epic name and inside epic folder create a docx file for each user story 
 remember to create a seperate docx for each user story
+if there is image associated with user story then please add that image with docx file so it will help developer to create screen based 
+on that image 

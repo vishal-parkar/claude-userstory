@@ -1,248 +1,107 @@
 ================================================================================
-RBP CALCULATOR — USER STORIES SUMMARY & OPEN QUESTIONS
-================================================================================
-Document  : RBP Calculator.docx
-Prepared by : Claude Code (Senior BA / Product Owner Analysis)
-Date      : 2026-04-14
+  RBP CALCULATOR – USER STORIES SUMMARY & OPEN QUESTIONS
+  Generated: 2026-04-14
 ================================================================================
 
+OVERVIEW
+--------
+Application: RBP (Rule-Based Policy) Calculator
+Purpose:     Build complex rule conditions using fields, math operators,
+             comparators, and logical AND/OR groups.
 
-================================================================================
-1. SUMMARY OF EPICS
-================================================================================
+Available Parameter Fields: FieldA, FieldB, FieldC, FieldD, FieldE, FieldF
 
-+--------+------------------------------------------+----------+-----------+
-| Epic   | Name                                     | FE/BE    | # Stories |
-+--------+------------------------------------------+----------+-----------+
-| Epic 1 | Expression Panel & Parameter Selection   | Frontend |     5     |
-| Epic 2 | Expression Building                      | Frontend |     8     |
-| Epic 3 | Comparator Configuration                 | Frontend |     3     |
-| Epic 4 | Condition Management & AND/OR Logic      | Frontend |     4     |
-| Epic 5 | Backend API & Data Services              | Backend  |     3     |
-+--------+------------------------------------------+----------+-----------+
-| TOTAL  |                                          | FE: 20   |    23     |
-|        |                                          | BE:  3   |           |
-+--------+------------------------------------------+----------+-----------+
+--------------------------------------------------------------------------------
+EPIC SUMMARY
+--------------------------------------------------------------------------------
 
+Epic 1 – Expression Builder Panel                       [2 stories | Frontend]
+  US-01  Display Expression Builder Main Screen
+  US-02  Open Select Expression Popup
 
-================================================================================
-2. USER STORY INDEX
-================================================================================
+Epic 2 – Parameter and Math Function Selection          [5 stories | Frontend]
+  US-03  Display Parameter Tab with Fields
+  US-04  Filter and Search Parameters by Name
+  US-05  Display Math Function Options
+  US-06  Display All Options in All Tab
+  US-07  Add Parameter Field to Expression
 
-EPIC 1 — Expression Panel & Parameter Selection (Frontend)
-  US-01  Open Expression Panel
-  US-02  Display Parameter List with Correct Label
-  US-03  Filter Parameters by Search
-  US-04  Display Math Function Options
-  US-05  Display All Options Combined (All Tab)
+Epic 3 – Number Input in Expression                     [2 stories | Frontend]
+  US-08  Add Number to Expression (0.0 token)
+  US-09  Edit Number via Popup
 
-EPIC 2 — Expression Building (Frontend)
-  US-06  Add a Field/Parameter to the Expression
-  US-07  Add Operator via Plus Sign
-  US-08  Operator Popup Contains Parameter / Math Function / All Options
-  US-09  Number Option in Parameter Panel
-  US-10  Edit Numeric Value in Expression
-  US-11  Bracket Math Function — Wrap Expression in Brackets
-  US-12  Build Expression Inside Bracket (Nested Expression)
-  US-13  Build Expression Outside Bracket
+Epic 4 – Operator and Bracket Expression Building       [5 stories | Frontend]
+  US-10  Add Math Operator Between Operands
+  US-11  Add Bracket Expression
+  US-12  Add Left Operand Inside Bracket
+  US-13  Add Operator and Right Operand Inside Bracket
+  US-14  Add Operand and Operator Outside Bracket
 
-EPIC 3 — Comparator Configuration (Frontend)
-  US-14  Open Add Comparator Popup
-  US-15  Select Comparator Option
-  US-16  Right-Hand Expression After Comparator
+Epic 5 – Comparator Configuration                       [2 stories | Frontend]
+  US-15  Add Comparator to Condition
+  US-16  Select Comparator Option
 
-EPIC 4 — Condition Management & AND/OR Logic (Frontend)
-  US-17  Complete Condition Creation
+Epic 6 – Condition Management and Logic                 [4 stories | Frontend]
+  US-17  Display Complete Condition Row
   US-18  Delete a Condition
   US-19  Add New Condition with AND/OR Logic
-  US-20  Group Conditions into Subgroups (Unlimited Nesting)
+  US-20  Toggle AND/OR Operator Between Conditions
 
-EPIC 5 — Backend API & Data Services (Backend)
-  US-21  API: Provide Configurable Field/Parameter List
-  US-22  API: Save Rule / Expression Configuration
-  US-23  API: Evaluate / Execute Expression
+Epic 7 – Group / Subgroup Conditions                    [3 stories | Frontend]
+  US-21  Create a Group (Subgroup Condition)
+  US-22  Delete a Group Condition
+  US-23  Add Conditions Inside a Group
 
+Epic 8 – Backend API and Data                           [2 stories | Backend]
+  US-24  API to Fetch Available Parameter Fields
+  US-25  API to Save and Evaluate Condition Rules
 
-================================================================================
-3. FRONTEND vs BACKEND STORY COUNT
-================================================================================
+--------------------------------------------------------------------------------
+TOTALS
+--------------------------------------------------------------------------------
+  Total Epics:          8
+  Total User Stories:  25
+  Frontend Stories:    23
+  Backend Stories:      2
 
-  Frontend Stories : 20  (US-01 to US-20)
-  Backend Stories  :  3  (US-21 to US-23)
-  Total            : 23
+--------------------------------------------------------------------------------
+OPEN QUESTIONS / NEEDS CLARIFICATION
+--------------------------------------------------------------------------------
 
-  Note: Backend stories (Epic 5) are derived implicitly from the UI requirements
-  since the BA document does not describe any backend/API behavior. All backend
-  stories require BA confirmation before development begins.
+1. [US-05] Math Functions tab – The BA document lists: Min, MAX, FLOOR, ABS,
+   BRACKET, CEIL. However, the reference UI screenshot also shows "Period min"
+   and "Period max". Confirm the complete list of Math Functions to display.
 
+2. [US-15] Comparator popup – Should the popup have a title/header label?
+   Not specified in the document.
 
-================================================================================
-4. OPEN QUESTIONS & CLARIFICATIONS NEEDED
-================================================================================
+3. [US-18] Delete condition – Should a confirmation dialog appear before
+   deleting a condition? The document says it removes immediately.
 
-The following ambiguities were identified during analysis. These must be
-resolved with the BA/Stakeholder before sprint planning.
+4. [US-22] Delete group – Should deleting a group that contains conditions
+   show a confirmation dialog?
 
---- UI LAYOUT / PANEL BEHAVIOR ---
+5. [US-24] Parameter fields – Are the fields (FieldA–FieldF) static/hardcoded,
+   or dynamically configurable per user or project from a database?
 
-Q1.  [US-01] Is the Expression panel a modal popup, inline dropdown, or a
-     side panel? What triggers dismissal (outside click, Escape key)?
+6. [US-25] Rule persistence – What is the expected JSON schema for the
+   condition rule structure to be stored/evaluated on the backend?
 
-Q2.  [US-01] Which tab (Parameter / Math Function / All) is selected by
-     default when the Expression panel first opens?
+7. [US-25] Rule evaluation – Should there be a rule evaluation/execution engine
+   on the backend, or is persistence only required?
 
-Q3.  [US-05] In the "All" tab, are Parameters and Math Functions shown as
-     separate labeled sections or a single flat merged list?
+8. [General] The "1Min" timeframe dropdown visible in the reference UI
+   screenshots has been explicitly excluded per BA instruction. Confirm this
+   applies across all condition rows.
 
-Q4.  [US-05] Does the "All" tab have a search box similar to the Parameter tab?
+9. [General] Basic vs Advance toggle – What is the difference in behaviour
+   between "Basic" and "Advance" mode? Not specified in the document.
 
+10.[General] Is there a maximum depth limit for nested groups?
 
---- PARAMETER / FIELD DATA ---
+11.[General] Should the entire conditions panel be saveable as a named rule/
+   template? Not specified in the document.
 
-Q5.  [US-02, US-21] Are the field labels FieldA–FieldF static/hardcoded in
-     the UI, or must they be fetched dynamically from a backend API?
-
-Q6.  [US-02] What is the display order of fields in the Parameter list?
-
-Q7.  [US-03] Should "Number" appear in search results when the user types
-     "number" in the Parameter search box?
-
-Q8.  [US-23] What are the data types of FieldA–FieldF (numeric, date, string)?
-
-
---- EXPRESSION BUILDING ---
-
-Q9.  [US-04] When a non-BRACKET math function (e.g., MIN, CEIL) is added to
-     the expression, what exact format is inserted into Add Expression —
-     e.g., "MIN(...)" with placeholder, or just "MIN" as a token?
-
-Q10. [US-06] Can the same field be used more than once in a single expression?
-
-Q11. [US-07] What are the exact math operator symbols available in the "+"
-     operator popup? (e.g., +, -, *, /, %)
-
-Q12. [US-07/08] Is the flow two separate steps (one popup for operator, then
-     panel for operand), or a single combined popup containing all of this?
-
-Q13. [US-10] Is there input validation on the number entry popup (e.g., only
-     numeric values allowed, decimal precision limit, min/max range)?
-
-Q14. [US-10] Can the user re-click a previously saved numeric token to edit
-     it again?
-
-Q15. [US-10] Does the number entry popup have a "Cancel" button in addition
-     to "Save"?
-
-Q16. [US-11] Can BRACKET be placed as the very first element of an expression
-     (before any operand), or only after a left operand + operator?
-
-Q17. [US-11] Does clicking BRACKET replace the entire existing expression, or
-     insert the bracket at the current cursor/position within the expression?
-
-Q18. [US-12] Is there a maximum depth limit for bracket nesting?
-
-Q19. [US-12] Can individual tokens inside a bracket be deleted independently?
-
-Q20. [US-13] Can there be multiple brackets at the same level in one expression
-     (e.g., (A + B) * (C + D))?
-
-
---- COMPARATOR ---
-
-Q21. [US-15] Should "Not equal to" be included as a comparator option?
-     It is not mentioned in the document.
-
-Q22. [US-15] After a comparator is selected, can the user click it to change
-     it to a different comparator without rebuilding the condition?
-
-Q23. [US-14] Is the "Add Comparator" button available before the left-hand
-     expression is built, or is it only enabled after the left side has content?
-
-Q24. [US-16] Is the right-hand expression built in the same Add Expression
-     component or a visually separate component?
-
-
---- CONDITION MANAGEMENT ---
-
-Q25. [US-17] Is there an explicit "Save Condition" or "Apply" button, or is
-     the condition auto-completed when all three parts are filled?
-
-Q26. [US-17] What happens to partial conditions (only left side filled) — are
-     they preserved or discarded on panel close or navigation?
-
-Q27. [US-18] Is there a confirmation dialog before deleting a condition,
-     or is deletion instant?
-
-Q28. [US-18] If a condition inside a subgroup is deleted and it is the last
-     condition in the subgroup, does the subgroup container also collapse/remove?
-
-
---- AND/OR LOGIC & GROUPING ---
-
-Q29. [US-19] Is the "(+ and/or)" button available inside a subgroup as well,
-     or only at the top level?
-
-Q30. [US-19] Can AND/OR connectors between different condition pairs be set
-     independently (e.g., Condition1 AND Condition2 OR Condition3)?
-
-Q31. [US-20] Is grouping triggered by clicking the AND/OR toggle (as implied
-     by the document), or is there a dedicated "Group" button?
-
-Q32. [US-20] Can an existing condition be moved into or out of a subgroup
-     (drag-and-drop or any interaction)?
-
-Q33. [US-20] Is subgroup nesting truly unlimited, or is there a depth cap?
-
-Q34. [US-20] Does each subgroup have its own delete control (bin icon), or
-     is it removed by deleting all its child conditions?
-
-
---- BACKEND & PERSISTENCE ---
-
-Q35. [US-22] Is there a "Save Rule" button in the UI? The document does not
-     mention one. Are rules auto-saved or require explicit save?
-
-Q36. [US-22] Can a previously saved rule be loaded back into the builder for
-     editing?
-
-Q37. [US-22] What is the expected JSON schema/structure for persisting a rule?
-
-Q38. [US-23] Is expression evaluation done in real-time (backend call while
-     building) or on explicit user action?
-
-Q39. [General] What does "RBP" stand for in "RBP Calculator"?
-
-Q40. [General] What is the broader business use case for this rule builder
-     (e.g., pricing engine, eligibility check, risk scoring)?
-
-
-================================================================================
-5. IMPLICIT REQUIREMENTS IDENTIFIED
-================================================================================
-
-The following requirements are NOT explicitly stated in the document but are
-considered necessary for a functional and usable product:
-
-IR-01  Keyboard accessibility for all interactive elements (popups, dropdowns,
-       token selection).
-
-IR-02  Empty state message when no conditions have been added yet.
-
-IR-03  Visual distinction between field tokens, math function tokens, operator
-       tokens, and numeric tokens in the expression display.
-
-IR-04  The ability to delete individual tokens from an expression
-       (e.g., removing one field or operator mid-expression).
-       [Needs Clarification — not mentioned in document]
-
-IR-05  Responsive/overflow behavior when a built expression is very long.
-
-IR-06  Loading state for the Parameter list if fields are fetched from an API.
-
-IR-07  Error state handling if the backend API (field list / save / evaluate)
-       fails or is unavailable.
-
-
-================================================================================
+--------------------------------------------------------------------------------
 END OF SUMMARY
-================================================================================
+--------------------------------------------------------------------------------

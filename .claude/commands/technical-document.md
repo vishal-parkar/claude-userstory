@@ -40,7 +40,10 @@ user_story_path:
 
 
 feature_title:
-- consider only file name that too string after first two dash - 
+- consider only file name that too string after first to dash "-"
+
+step_number:
+- in feature title after "US-" there is two digit number that is step_number
 
 branch_name:
 - feature/<feature_title>
@@ -154,6 +157,10 @@ Unit Testing (MANDATORY):
 - Component tests
 - Interaction tests
 
+screen Layout (IMPORTANT)
+if there is any screen image you found in User-stories (UI Reference) please preserve it in technical document it is important becuase based on that image
+screen format only developer will create his screen.
+
 ----------------------------------------
 Backend Scope (if applicable)
 ----------------------------------------
@@ -238,7 +245,7 @@ Step 8 — Save spec
 ----------------------------------------
 Save file:
 
-.claude/specs/<step_number>-<feature_slug>.md
+.claude/specs/<step_number>-<feature_title>.md
 
 ----------------------------------------
 Step 9 — Output
@@ -247,11 +254,11 @@ Step 9 — Output
 Print ONLY:
 
 Branch:    <branch_name>
-Spec file: .claude/specs/<step_number>-<feature_slug>.md
+Spec file: .claude/specs/<step_number>-<feature_title>.md
 Title:     <feature_title>
 
 Then say:
 
-"Review the spec at .claude/specs/<step_number>-<feature_slug>.md then enter Plan Mode with Shift+Tab twice to begin implementation."
+"Review the spec at .claude/specs/<step_number>-<feature_title>.md then enter Plan Mode with Shift+Tab twice to begin implementation."
 
 DO NOT print full spec.
